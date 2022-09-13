@@ -1,6 +1,21 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require('path');
+const glob = require('glob');
+
+let htmlPlugins = [];
+
+let files = glob.sync('./src/views/*.html');
+files.forEach(file => {
+  let htmlPlugin = new HtmlWebpackPlugin({
+    filename: file.split('/').at(-1),
+    template: file
+  });
+  htmlPlugins.push(htmlPlugin);
+});
+
+
+
 
 module.exports = {
   entry: './src/index.js',
@@ -28,18 +43,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({
-        title: 'My cool title',
-        template: './src/index.html'
-    }),
-    new HtmlWebpackPlugin({
-      title: 'My cool title',
-      template: './src/index.html'
-    }),
-    new HtmlWebpackPlugin({
-        title: 'My cool title',
-        template: './src/index.html'
-    }),
+    ...htmlPlugins,
     new MiniCssExtractPlugin()
   ],
 };
