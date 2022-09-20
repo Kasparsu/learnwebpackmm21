@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const PurgecssPlugin = require('purgecss-webpack-plugin');
 const path = require('path');
 const glob = require('glob');
 
@@ -15,7 +16,9 @@ files.forEach(file => {
 });
 
 
-
+const PATHS = {
+  src: path.join(__dirname, 'src/views')
+}
 
 module.exports = {
   entry: './src/index.js',
@@ -53,6 +56,9 @@ module.exports = {
   },
   plugins: [
     ...htmlPlugins,
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin(),
+    new PurgecssPlugin.PurgeCSSPlugin({
+      paths: glob.sync(`${PATHS.src}/**/*`,  { nodir: true }),
+    }),
   ],
 };
