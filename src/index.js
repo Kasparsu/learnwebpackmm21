@@ -1,5 +1,5 @@
 import './style.scss';
 
-import hello from './hello.js';
+let hello = require('./hello.js');
 
 hello.hello();
