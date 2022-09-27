@@ -5,10 +5,12 @@ import { createApp } from 'vue';
 import * as VueRouter from 'vue-router';
 
 import App from './App.vue';
-import ToDoList from './ToDoList.vue';
+import ToDoList from './pages/ToDoList.vue';
+import Modals from './pages/Modals.vue';
 
 const routes = [
-    { path: '/', component: ToDoList }
+    { path: '/', component: Modals, name: 'Home' },
+    { path: '/todolist', component: ToDoList, name: 'To-Do List' },
 ]
 
 const router = VueRouter.createRouter({

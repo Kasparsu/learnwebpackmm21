@@ -1,25 +1,21 @@
 <template>
-    <div class="container">
-        <section class="section">
-            <div class="field has-addons"> 
-                <p class="control">
-                    <input class="input" type="text" v-model="newItem" @keydown.enter="addItem()">
-                </p>
-                <p class="control">
-                    <button class="button" @click="addItem()">Add</button>        
-                </p>    
-            </div>
-            <div class="content">
-                <item-list title="All Items" :items="items"></item-list>
-                <item-list title="Done Items" :items="doneItems"></item-list>
-                <item-list title="Not Done Items" :items="notDoneItems"></item-list>
-            </div>
-        </section>
+    <div class="field has-addons"> 
+        <p class="control">
+            <input class="input" type="text" v-model="newItem" @keydown.enter="addItem()">
+        </p>
+        <p class="control">
+            <button class="button" @click="addItem()">Add</button>        
+        </p>    
+    </div>
+    <div class="content">
+        <item-list title="All Items" :items="items"></item-list>
+        <item-list title="Done Items" :items="doneItems"></item-list>
+        <item-list title="Not Done Items" :items="notDoneItems"></item-list>
     </div>
 </template>
 
 <script>
-import ItemList from './ItemList.vue';
+import ItemList from '../components/ItemList.vue';
 export default {
   components: { ItemList },
     data(){
