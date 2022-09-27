@@ -22,6 +22,7 @@
   "homepage": "https://github.com/Kasparsu/learnwebpackmm21#readme",
   "dependencies": {
     "twig-loader": "^0.5.5",
+    "vue-router": "^4.1.5",
     "webpack": "^5.74.0"
   },
   "devDependencies": {
