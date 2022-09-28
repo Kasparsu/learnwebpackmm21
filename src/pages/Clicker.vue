@@ -53,6 +53,7 @@ export default {
     methods: {
         cookieClick(){
             this.cookies += this.click;
+            this.cookies++;
             this.clickClass = true;
             setTimeout(()=> {
                 this.clickClass = false;
@@ -65,6 +66,8 @@ export default {
             }
         },
         clickUpgrade(click, cost){
+            this.click++;
+            this.cookies - cost;
             if(this.cookies >=cost){
                 this.click += click;
                 this.cookies -= cost;
