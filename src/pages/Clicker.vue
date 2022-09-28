@@ -38,6 +38,7 @@ export default {
             return parseFloat(this.cps.toFixed(1));
         }
     },
+    //Sound FX
     methods: {
         cookieClick(){
             this.cookies++;
