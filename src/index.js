@@ -7,9 +7,11 @@ import * as VueRouter from 'vue-router';
 import App from './App.vue';
 import ToDoList from './pages/ToDoList.vue';
 import Modals from './pages/Modals.vue';
+import Clicker from './pages/Clicker.vue';
 
 const routes = [
-    { path: '/', component: Modals, name: 'Home' },
+    { path: '/', component: Clicker, name: 'Clicker' },
+    { path: '/modal', component: Modals, name: 'Modal' },
     { path: '/todolist', component: ToDoList, name: 'To-Do List' },
 ]
 
