@@ -1,9 +1,9 @@
 <template>
   <div class="columns">
     <div class="column is-one-third has-text-centered">
-        <b>{{displayCookies}} cookies</b>
+        <b>{{displayCookies}} Cookies</b>
         <br>
-        <b>{{displayCps}} cookies per second</b>
+        <b>{{displayCps}} Cookies per second</b>
         <img @click="cookieClick()" :class="{'click': clickClass}" src="https://www.picng.com/upload/cookie/png_cookie_11811.png">
     </div>
     <div class="column">
