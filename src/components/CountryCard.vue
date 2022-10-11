@@ -1,11 +1,13 @@
 <template>
     <div class="card">
-        <header class="card-header has-background-primary">
-            <p class="card-header-title">{{country.Country}}</p>
-            <figure class="image is-64x64">
-                <img :src="'https://countryflagsapi.com/png/' + country.CountryCode">
-            </figure>
-        </header>
+        <router-link :to="'/countries/' + country.Slug">
+            <header class="card-header has-background-primary">
+                <p class="card-header-title">{{country.Country}}</p>
+                <figure class="image is-64x64">
+                    <img :src="'https://countryflagsapi.com/png/' + country.CountryCode">
+                </figure>
+            </header>
+        </router-link>
         <div class="card-content">
             <div class="content">
                 <b>New Confirmed:</b> {{country.NewConfirmed}}<br>

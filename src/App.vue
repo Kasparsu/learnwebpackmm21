@@ -1,5 +1,5 @@
 <template>
-    <tabs :links="$router.getRoutes()" :current="$route.path"></tabs>
+    <tabs :links="namedRoutes" :current="$route.path"></tabs>
     <div class="container">
         <section class="section">
             <router-view></router-view>
@@ -13,6 +13,11 @@ export default {
     components: { Tabs },
     created(){
         console.log(this.$router.getRoutes());
+    },
+    computed: {
+        namedRoutes(){
+            return this.$router.getRoutes().filter(route => route.name);
+        }
     }
 }
 </script>
