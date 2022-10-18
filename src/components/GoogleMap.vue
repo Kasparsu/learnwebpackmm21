@@ -298,11 +298,28 @@ export default {
             this.map.addListener("zoom_changed", () => {
                 this.$emit('zoomChanged', this.map.getZoom());
             });
-            this.map.data.loadGeoJson('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json');
+            console.log(this.map.data);
+            this.map.data.addGeoJson(this.geoJson);
+            this.map.data.setStyle(function(feature) {
+                let confirmed = feature.getProperty('totalConfirmed');
+                                  
+                var color = confirmed > 10_000_000 ? 'red' : 
+                            confirmed > 1_000_000 ? '#F74725' :
+                            confirmed > 100_000 ? '#F59204' :
+                            confirmed > 10_000 ? '#F5C807' :
+                            confirmed > 1000 ? '#E9F502' :
+                            confirmed > 100 ? '#87F501' :
+                            confirmed >= 0 ? 'green' : 'black';
+
+                return {
+                    fillColor: color,
+                    strokeWeight: 1
+                };
+            });
         });
 
     },
-    props: ['center', 'zoom'],
+    props: ['center', 'zoom', 'geoJson'],
     data(){
         return {
             map: null,
@@ -317,6 +334,29 @@ export default {
         zoom(newZoom){
             console.log(newZoom);
             this.map.setZoom(newZoom);
+        },
+        geoJson(newGeoJson){
+            if(this.map){
+                this.map.data.addGeoJson(newGeoJson);
+                this.map.data.setStyle(function(feature) {
+                    let confirmed = feature.getProperty('totalConfirmed');
+                    if(feature.getProperty('name') == 'Russia'){
+                        console.log(confirmed);
+                    }
+                    var color = confirmed > 10_000_000 ? 'red' : 
+                                confirmed > 1_000_000 ? '#F74725' :
+                                confirmed > 100_000 ? '#F59204' :
+                                confirmed > 10_000 ? '#F5C807' :
+                                confirmed > 1000 ? '#E9F502' :
+                                confirmed > 100 ? '#87F501' :
+                                confirmed >= 0 ? 'green' : 'black';
+
+                    return {
+                        fillColor: color,
+                        strokeWeight: 1
+                    };
+                });
+            }
         }
     }
 }
