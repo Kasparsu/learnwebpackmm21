@@ -1,29 +1,37 @@
 <template>
-  <div id="map"></div>
+    <button class="button is-primary" @click="goToHome">Go To Home</button>
+    <google-map :center="center" :zoom="zoom" @centerChanged="updateCenter" @zoomChanged="updateZoom">
+        <google-map-marker :pos="{ lat: 59.4269112, lng: 24.743487 }"></google-map-marker>
+    </google-map>
 </template>
 
 <script>
-import { Loader } from "@googlemaps/js-api-loader"
+import GoogleMap from '../components/GoogleMap.vue'
+import GoogleMapMarker from '../components/GoogleMapMarker.vue';
 export default {
-    mounted(){
-        const loader = new Loader({
-            apiKey: "AIzaSyCFZquZ6fD9XiCi_1Pv9KVBhu5Qj8ukpy4",
-            version: "weekly"
-        });
-
-        loader.load().then(() => {
-            map = new google.maps.Map(document.getElementById("map"), {
-                center: { lat: -34.397, lng: 150.644 },
-                zoom: 8,
-            });
-        });
-
+  components: { GoogleMap, GoogleMapMarker },
+  data(){
+    return {
+        center: { lat: 59.4269112, lng: 24.743487 },
+        zoom: 18
     }
+  },
+  methods:{
+    goToHome(){
+        this.center={lat:59.410645, lng: 24.605453};
+        this.zoom=18;
+    },
+    updateCenter(newCenter){
+        this.center = newCenter;
+    },
+    updateZoom(newZoom){
+        this.zoom = newZoom;
+    }
+  }
+
 }
 </script>
 
-<style scoped>
-#map {
-  height: 600px;
-}
+<style>
+
 </style>
