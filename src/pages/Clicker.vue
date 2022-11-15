@@ -7,8 +7,15 @@
             <img @click="cookiesClick()" :class="{'click': clickClass}" src="https://www.picng.com/upload/cookie/png_cookie_11811.png" alt="cookie">
         </div>
         <div class="column">
-        <button @click="Upgrade(0.1, Cps1Cost)" class="button is-primary" :disabled="cookies<Cps1Cost">Buy 0.1 cps for {{Cps1Cost}} cookies</button>
-        <button @click="UpgradeClick(1, Cpc1Cost)" class="button is-primary" :disabled="cookies<Cpc1Cost">Buy +1 cookies per every click for {{Cpc1Cost}} cookies</button><br>
+        <button @click="Upgrade(0.1, 0)" class="button is-primary" :disabled="cookies<this.cpsCosts[0]">Buy 0.1 cps for {{this.cpsCosts[0]}} cookies</button><br>
+        <button @click="Upgrade(1, 1)" class="button is-primary" :disabled="cookies<this.cpsCosts[1]">Buy 1 cps for {{this.cpsCosts[1]}} cookies</button><br>
+        <button @click="Upgrade(10, 2)" class="button is-primary" :disabled="cookies<this.cpsCosts[2]">Buy 10 cps for {{this.cpsCosts[2]}} cookies</button><br>
+        <button @click="Upgrade(100, 3)" class="button is-primary" :disabled="cookies<this.cpsCosts[3]">Buy 100 cps for {{this.cpsCosts[3]}} cookies</button><br>
+        <br>
+        <button @click="UpgradeClick(1, 0)" class="button is-primary" :disabled="cookies<this.cpcCosts[0]">Buy +1 cookies per every click for {{this.cpcCosts[0]}} cookies</button><br>
+        <button @click="UpgradeClick(1, 1)" class="button is-primary" :disabled="cookies<this.cpcCosts[1]">Buy +1 cookies per every click for {{this.cpcCosts[1]}} cookies</button><br>
+        <button @click="UpgradeClick(1, 2)" class="button is-primary" :disabled="cookies<this.cpcCosts[2]">Buy +1 cookies per every click for {{this.cpcCosts[2]}} cookies</button><br>
+        <button @click="UpgradeClick(1, 3)" class="button is-primary" :disabled="cookies<this.cpcCosts[3]">Buy +1 cookies per every click for {{this.cpcCosts[3]}} cookies</button><br>
         </div>
     </div>
 </template>
@@ -37,8 +44,8 @@ export default {
             cookies: 0,
             cps: 0,
             click: 1,
-            Cpc1Cost: 10,
-            Cps1Cost: 10,
+            cpsCosts:[/*1*/ 10, /*2*/100, /*3*/1000, /*4*/10000],
+            cpcCosts:[/*1*/ 10, /*2*/100, /*3*/1000, /*4*/10000],
         }
     },
     methods: {
@@ -49,18 +56,20 @@ export default {
                 this.clickClass = false;
             }, 100);
         },
-        Upgrade(cps, cost){
-            if (this.cookies >= cost) {
-                this.cookies -= cost;
+        Upgrade(cps, index){
+            if (this.cookies >= this.cpsCosts[index]) {
+                this.cookies -=  this.cpsCosts[index];
                 this.cps += cps;
-                this.Cps1Cost++;
+                 this.cpsCosts[index] *= 1.1;
+                console.log(this.cpsCosts[index]);
             }
         },
-        UpgradeClick(click, cost){
-            if (this.cookies >= cost) {
-                this.cookies -= cost;
+        UpgradeClick(click, index){
+            if (this.cookies >= this.cpcCosts[index]) {
+                this.cookies -= this.cpcCosts[index];
                 this.click += click;
-                this.Cpc1Cost++;
+                this.cpcCosts[index] *= 1.1;
+                console.log(this.cpcCosts[index]);
             }
         },
     }
