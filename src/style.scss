@@ -1,7 +1,10 @@
-$primary: coral;
+$primary: red;
 @import "../node_modules/bulma/bulma.sass";
-$bgcolor: coral;
+$bgcolor: gray;
 
 html, body {
-    background-color: lighten($bgcolor, 30%);
+    background-color:($bgcolor);
+}
+b{
+    color:white
 }

@@ -7,13 +7,15 @@
         <img @click="cookieClick()" :class="{'click': clickClass}" src="https://www.picng.com/upload/cookie/png_cookie_11811.png">
     </div>
     <div class="column">
-        <button @click="upgrade(0.1, 10)" class="button is-primary" :disabled="cookies<10">Buy 0.1 cps for 10 cookies</button>
-        <button @click="upgrade(1, 100)" class="button is-primary" :disabled="cookies<100">Buy 1 cps for 100 cookies</button>
-        <button @click="upgrade(10, 1000)" class="button is-primary" :disabled="cookies<1000">Buy 10 cps for 1000 cookies</button>
-        <button @click="upgrade(100, 10000)" class="button is-primary" :disabled="cookies<10000">Buy 100 cps for 10000 cookies</button>
-        <button @click="upgrade(1000, 100000)" class="button is-primary" :disabled="cookies<100000">Buy 1000 cps for 100000 cookies</button>
+        <button @click="upgrade(0.1, 10)" class="button is-primary" :disabled="cookies<10"><b>Buy 0.1 cps for 10 cookies</b></button>
+        <button @click="upgrade(1, 100)" class="button is-primary" :disabled="cookies<100"><b>Buy 1 cps for 100 cookies</b></button>
+        <button @click="upgrade(10, 1000)" class="button is-primary" :disabled="cookies<1000"><b>Buy 10 cps for 1000 cookies</b></button>
+        <button @click="upgrade(100, 10000)" class="button is-primary" :disabled="cookies<10000"><b>Buy 100 cps for 10000 cookies</b></button>
+        <button @click="upgrade(1000, 100000)" class="button is-primary" :disabled="cookies<100000"><b>Buy 1000 cps for 100000 cookies</b></button>
     </div>
   </div>
+	<b>Change Background Color To:</b><input type="text" v-on:input="color"/>
+<br/>
 </template>
 
 <script>
@@ -51,7 +53,12 @@ export default {
                 this.cookies -= cost;
                 this.cps += cps;
             }
-        }
+        },
+        color(event){
+            console.log(document)
+            document.getElementsByTagName('html')[0].style.backgroundColor = event.target.value;
+            document.getElementsByTagName('body')[0].style.backgroundColor = event.target.value;
+        },
     }
 }
 </script>
