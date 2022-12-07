@@ -1,22 +1,49 @@
+
+
 <template>
+
   <div class="columns">
     <div class="column is-one-third has-text-centered">
-        <b>{{displayCookies}} cookies</b>
-        <br>
-        <b>{{displayCps}} cookies per second</b>
-        <img @click="cookieClick()" :class="{'click': clickClass}" src="https://www.picng.com/upload/cookie/png_cookie_11811.png">
+       
+        
     </div>
-    <div class="column">
-        <button @click="upgrade(0.1, 10)" class="button is-primary" :disabled="cookies<10">Buy 0.1 cps for 10 cookies</button>
-        <button @click="upgrade(1, 100)" class="button is-primary" :disabled="cookies<100">Buy 1 cps for 100 cookies</button>
-        <button @click="upgrade(10, 1000)" class="button is-primary" :disabled="cookies<1000">Buy 10 cps for 1000 cookies</button>
-        <button @click="upgrade(100, 10000)" class="button is-primary" :disabled="cookies<10000">Buy 100 cps for 10000 cookies</button>
-        <button @click="upgrade(1000, 100000)" class="button is-primary" :disabled="cookies<100000">Buy 1000 cps for 100000 cookies</button>
+    <div class="column1">
+        
+       <b>{{displayCookies}} Kitkats</b>
+        <br>
+        <b>{{displayCps}}Clicks persecond</b>
+        <br>
+        <b>Total amount of clicks:{{clicks}}</b>
+       
+
+        <div>
+        <img @click="cookieClick()" :class="{'click': clickClass}" :src="img">
+        </div>
+        
+    </div>
+    <div class="column3">
+          <button @click="upgrade(1, 10)" class="button is-primary" :disabled="cookies<10">Buy 1 cps for 10 KitKats</button>
+        <br>
+        <button @click="upgrade(10, 100)" class="button is-primary" :disabled="cookies<100">Buy 10 cps for 100 KitKats</button>
+        <br>
+        <button @click="upgrade(100, 1000)" class="button is-primary" :disabled="cookies<1000">Buy 100 cps for 1000 KitKats</button>
+        <br>
+        <button @click="upgrade(1000, 10000)" class="button is-primary" :disabled="cookies<10000">Buy 1000 cps for 10000 KitKats</button>
+        <br>
+        <button @click="upgrade1(0,0)" class="button is-primary" :disabled="cookies<1">Buy a KitKat for 1000000</button>
     </div>
   </div>
 </template>
 
-<script>
+<script type="text/javascript">
+
+
+
+
+
+
+
+
 export default {
     created(){
         setInterval(()=>{
@@ -27,7 +54,10 @@ export default {
         return {
             clickClass: false,
             cookies: 0,
-            cps: 0
+            cps: 0,
+            clicks: 0,
+            img: "https://abestore.ee/23430-medium_default/kitkat-415g.jpg"
+            
         }
     },
     computed: {
@@ -41,6 +71,7 @@ export default {
     methods: {
         cookieClick(){
             this.cookies++;
+            this.clicks++;
             this.clickClass = true;
             setTimeout(()=> {
                 this.clickClass = false;
@@ -51,13 +82,32 @@ export default {
                 this.cookies -= cost;
                 this.cps += cps;
             }
+        },
+      
+      upgrade1(cps, cost){
+            if(this.cookies >= cost){
+                this.cookies -= cost;
+                this.cps += cps;
+                alert('You got a KitKat');
+                this.img="https://cdn.dribbble.com/users/1878524/screenshots/15732577/media/018cdd4e74cbb183ff6eda179b098dec.gif?compress=1&resize=400x300&vertical=top"
+
+            }
         }
+
+
+
     }
 }
+
 </script>
 
 <style scoped>
     img.click {
         transform: scale(0.9);
+        transition: all 0.0001s ease-in-out;
     }
+    
+
+
+    
 </style>
